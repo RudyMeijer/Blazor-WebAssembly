@@ -1,6 +1,6 @@
 ﻿export function load_map(raw) {
     console.log(JSON.parse(String(raw)));
-    let map = L.map('map').setView({ lon: 26.097133, lat: 44.446165  }, 16);
+    let map = L.map('map').setView({ lat: 52.263467, lon: 6.17359 }, 16);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
     var geojson_layer = L.geoJSON().addTo(map);
     var geojson_data = JSON.parse(String(raw));
@@ -20,7 +20,28 @@
         );
         marker.addTo(map);
     }
+    //
+    // Data
+    //
+    var popup = L.popup();
+    //
+    //  Handle mouse events.
+    //
+    function onMapClick(e) {
+        console.log("Mouse:" + e.latlng.toString());
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(map);
+    }
+    map.on('click', onMapClick);
 
+
+    var polygon = L.polygon([
+        [52.2509, 6.08],
+        [52.2303, 6.06],
+        [52.251, 6.047]
+    ]).addTo(map);
 
 
     return "";
