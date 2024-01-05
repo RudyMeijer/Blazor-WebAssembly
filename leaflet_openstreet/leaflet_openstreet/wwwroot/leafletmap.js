@@ -43,6 +43,14 @@
         [52.251, 6.047]
     ]).addTo(map);
 
-
+    // FeatureGroup is to store editable layers
+    var drawnItems =  L.FeatureGroup();
+    map.addLayer(drawnItems);
+    var drawControl =  L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        }
+    });
+    map.addControl(drawControl);
     return "";
 }
