@@ -52,5 +52,13 @@
         }
     });
     map.addControl(drawControl);
+
+    // Add Draw Event Listeners.
+    map.on(L.Draw.Event.CREATED, function (event) {
+        var layer = event.layer;
+
+        drawnItems.addLayer(layer);
+    });
+
     return "";
 }
